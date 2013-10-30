@@ -6,11 +6,11 @@ class Item
 {
     public:
         TYPE Data;
-        Item *Next;
+        Item<TYPE> *Next;
 
 
         Item();
-        Item(TYPE val): Data(val), Next(NULL)
+        Item(TYPE val): Data(val), Next(0)
         { }
         /*
         int data()
