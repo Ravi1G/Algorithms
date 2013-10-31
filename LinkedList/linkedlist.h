@@ -22,13 +22,13 @@ class LinkedList
 
             if (cur == NULL)
                 head = It;
+
             else{
                 while (cur->Next){
                     cur = cur->Next;
                 }
                 cur->Next = It;
             }
-
         }
 
         void display()
