@@ -22,4 +22,5 @@ public:
 	friend ostream& operator<< (ostream&, SportsMan&);
 };
 
+
 #endif
