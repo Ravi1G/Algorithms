@@ -8,19 +8,19 @@ template <class TYPE>
 class LinkedList
 {
     private:
-        Item *head;
+        Item<TYPE> *head;
 
     public:
-        LinkedList(): head(NULL)
+        LinkedList(): head(0)
         { }
 
         void add(TYPE val)
         {
-            Item *It = new Item(val);
+            Item<TYPE> *It = new Item<TYPE>(val);
 
-            Item *cur = head;
+            Item<TYPE> *cur = head;
 
-            if (cur == NULL)
+            if (cur == 0)
                 head = It;
 
             else{
@@ -33,7 +33,7 @@ class LinkedList
 
         void display()
         {
-            Item* cur = head;
+            Item<TYPE> *cur = head;
 
 
             while(cur)
