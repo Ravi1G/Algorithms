@@ -6,39 +6,70 @@
 
 class BinarSearchTree
 {
-    public:
-        Node *Root; // pointer to root of tree;
+    private:
+        TreeNode *Root; // pointer to root of tree;
 
+        void InOrder(TreeNode *ptr)
+        {
+            if (ptr != NULL){
+                InOrder(ptr->Left);
+                std::cout << ptr->Data << " ";
+                InOrder(ptr->Right);
+            }
+        }
+    public:
         int ShowRoot(){
             return Root->Data;
 
         }
 
-        BinarSearchTree(): Root(NULL)
-        { }
-
-
-
-        void TreeInsert(int val)
+        BinarSearchTree()
         {
-            TreeInsertHelper(Root, val);
-
+            Root = NULL;
         }
 
-        void TreeInsertHelper(Node *ptr, int val)
+        void add(int x)
         {
+            TreeNode *ptr = new TreeNode(x),
+                     *cur;
 
-            if (!ptr)
-                Node *ptr  = new Node(val, val);
-            else{
-                if (ptr->Data > val)
-                    TreeInsertHelper(ptr->Left, val);
-                else
-                    TreeInsertHelper(ptr->Right, val);
 
+            // if tree is empty
+            if (Root == NULL){
+                Root = ptr;
+                return;
+            }
+            // else
+            cur = Root;
+
+            if (x < cur->Data){
+                cur->Left = ptr;
             }
 
+            if (x > cur->Data)
+                cur->Right = ptr;
+
         }
+
+
+        void InOrderWalk()
+        {
+            InOrder(Root);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
 

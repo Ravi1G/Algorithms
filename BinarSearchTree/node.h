@@ -1,14 +1,31 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-struct Node
+class TreeNode
 {
-    int Key;
-    int Data;
-    Node *Parent,
-         *Left,
-         *Right;
+    private:
+        friend class BinarSearchTree;
+        //char Key;
+        int Data;
+        TreeNode *Parent,
+             *Left,
+             *Right;
 
+    public:
+    TreeNode()
+    {
+        Parent = Left = Right = NULL;
+    }
+
+    TreeNode(int x)
+    {
+        Parent = Left = Right = NULL;
+        Data = x;
+    }
+
+
+
+/*
     Node(int k, int d)
     {
         Key = k;
@@ -16,7 +33,7 @@ struct Node
 
         Parent = Left = Right = NULL;
     }
-
+*/
 };
 
 
