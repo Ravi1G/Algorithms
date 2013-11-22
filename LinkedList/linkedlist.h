@@ -11,39 +11,111 @@ class LinkedList
         Item<TYPE> *head;
 
     public:
-        LinkedList(): head(0)
-        { }
+        LinkedList();
+        ~LinkedList();
 
-        void add(TYPE val)
-        {
-            Item<TYPE> *It = new Item<TYPE>(val);
-
-            Item<TYPE> *cur = head;
-
-            if (cur == 0)
-                head = It;
-
-            else{
-                while (cur->Next){
-                    cur = cur->Next;
-                }
-                cur->Next = It;
-            }
-        }
-
-        void display()
-        {
-            Item<TYPE> *cur = head;
+        void push_back(TYPE val);
+        void pull_back();
+        void remove(int);
+        void display();
+        void reverse();
 
 
-            while(cur)
-            {
-                std::cout << cur->Data << " ";
-                cur = cur->Next;
-            }
-
-        }
 };
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+LinkedList<TYPE>::LinkedList(): head(0)
+{ }
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+LinkedList<TYPE>::~LinkedList()
+{
+    Item<TYPE> *cur = head;
+
+    while (cur->Next){
+        cur = cur->Next;
+        delete head;
+        head = cur;
+    }
+
+    delete head;
+}
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+void LinkedList<TYPE>::push_back(TYPE val)
+{
+    Item<TYPE> *It = new Item<TYPE>(val);
+
+    Item<TYPE> *cur = head;
+
+    if (!cur)
+        head = It;
+
+    else{
+        while (cur->Next)
+            cur = cur->Next;
+
+        cur->Next = It;
+    }
+}
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+void LinkedList<TYPE>::pull_back()
+{
+
+
+}
+
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+void LinkedList<TYPE>::display()
+{
+    Item<TYPE> *cur = head;
+
+    while(cur){
+        std::cout << cur->Data << " ";
+        cur = cur->Next;
+    }
+
+    std::cout << "\n";
+}
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+
+template <class TYPE>
+void LinkedList<TYPE>::reverse()
+{
+    Item<TYPE> *cur = head->Next, *temp;
+
+    head->Next = NULL;
+
+    while(cur){
+        temp = cur;
+        cur = cur->Next;
+        temp -> Next = head;
+        head = temp;
+    }
+
+    cur = temp = NULL;
+}
+
+
 
 
 
