@@ -15,8 +15,10 @@ class TreeNode
 
 
     public:
-    TreeNode();
-    TreeNode(int key, int val);
+        TreeNode();
+        TreeNode(int key, int val);
+
+        int data();
 
 };
 
@@ -25,19 +27,27 @@ class TreeNode
 
 //template <class TYPE>
 TreeNode::TreeNode()
-    {
-        Parent = Left = Right = NULL;
-    }
+{
+    Parent = Left = Right = NULL;
+}
 
 //////////////////////////////////////////////
 //////////////////////////////////////////////
 
 //template <class TYPE>
 TreeNode::TreeNode(int key, int val)
-    {
-        Parent = Left = Right = NULL;
-        Data = val;
-        Key = key;
-    }
+{
+    Parent = Left = Right = NULL;
+    Data = val;
+    Key = key;
+}
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+
+int TreeNode::data()
+{
+    return Data;
+}
 
 #endif // NODE_H_

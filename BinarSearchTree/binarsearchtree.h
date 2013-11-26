@@ -15,17 +15,26 @@ class BinarSearchTree
         void PreOrder(TreeNode *);
         void PostOrder(TreeNode *);
 
+        TreeNode* SearchTree(TreeNode *, int *);
+
     public:
 
         BinarSearchTree();
 
         void Insert(int, int);
+        void Delete(int);
 
         void InOrderWalk();
         void PreOrderWalk();
         void PostOrderWalk();
 
-
+        TreeNode* Search(int key); // search node with key
+        TreeNode* Minimum();
+        TreeNode* Minimum(TreeNode *);
+        TreeNode* Maximum();
+        TreeNode* Maximum(TreeNode *);
+        TreeNode* Successor(TreeNode*);
+        TreeNode* Predecessor(TreeNode *);
 };
 
 ///////////////////////////////////////////
@@ -137,25 +146,123 @@ void BinarSearchTree::Insert(int key, int val)
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
+void BinarSearchTree::Delete(int key)
+{
+    /*
+    3 ситуации:
+    а) у узла нет дочерних узлов
+    б) 1 дочерний узел
+    в) 2 дочерних узла
+    */
 
 
 
 
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Search(int key)
+{
+   return SearchTree(Root, &key);
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::SearchTree(TreeNode *ptr, int *k)
+{
+    if (ptr == NULL || *k == ptr->Key)
+        return ptr;
+
+    if (*k < ptr->Key)
+        return SearchTree(ptr->Left, k);
+    else
+        return SearchTree(ptr->Right, k);
+
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Minimum()
+{
+    TreeNode *cur = Root;
+    while(cur->Left)
+        cur = cur->Left;
+    return cur;
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Minimum(TreeNode *cur)
+{
+    while(cur->Left)
+        cur = cur->Left;
+    return cur;
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Maximum()
+{
+    TreeNode *cur = Root;
+    while(cur->Right)
+        cur = cur->Right;
+    return cur;
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Maximum(TreeNode *cur)
+{
+    while(cur->Right)
+        cur = cur->Right;
+    return cur;
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Successor(TreeNode *cur)
+{
+    if (cur->Right != NULL)
+        return Minimum(cur->Right);
 
 
+    TreeNode *par = cur->Parent;
+
+    while(par != NULL && cur == par->Right){
+        cur = par;
+        par = cur->Parent;
+    }
+
+    return par;
+}
+
+///////////////////////////////////////////
+///////////////////////////////////////////
+
+TreeNode* BinarSearchTree::Predecessor(TreeNode *cur)
+{
+    TreeNode *par = cur->Parent;
+
+    if (par == NULL) //т.е. мы в корне
+        return Maximum(cur->Left);
+
+    if (cur == par->Right) // узел рут правого поддерева предыдущего (искомого) узла
+        return par;
+
+    return Maximum(cur->Left);
 
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////
+///////////////////////////////////////////
 
 #endif // BINARSEARCHTREE_H_
