@@ -91,8 +91,10 @@ void BinarSearchTree::PreOrder(TreeNode *tr)
 {
     if (tr){
         std::cout << tr->Data << " ";
-        InOrder(tr->Left);
-        InOrder(tr->Right);
+        if (tr->Left)
+            PreOrder(tr->Left);
+        if (tr->Right)
+            PreOrder(tr->Right);
     }
 }
 
@@ -102,8 +104,8 @@ void BinarSearchTree::PreOrder(TreeNode *tr)
 void BinarSearchTree::PostOrder(TreeNode *tr)
 {
     if (tr){
-        InOrder(tr->Left);
-        InOrder(tr->Right);
+        PostOrder(tr->Left);
+        PostOrder(tr->Right);
         std::cout << tr->Data << " ";
     }
 }
@@ -129,7 +131,7 @@ void BinarSearchTree::Insert(int key, int val)
     while (cur){
         par = cur;
 
-        if (val < cur->Data)
+        if (key < cur->Data)
             cur = cur->Left;
         else
             cur = cur->Right;
@@ -137,7 +139,7 @@ void BinarSearchTree::Insert(int key, int val)
 
     ptr->Parent = par;
 
-    if(val < par->Data)
+    if(key < par->Data)
         par->Left = ptr;
     else
         par->Right = ptr;
@@ -249,17 +251,19 @@ TreeNode* BinarSearchTree::Successor(TreeNode *cur)
 
 TreeNode* BinarSearchTree::Predecessor(TreeNode *cur)
 {
-    TreeNode *par = cur->Parent;
 
-    if (par == NULL) //т.е. мы в корне
+    if (cur->Left != NULL)
         return Maximum(cur->Left);
 
-    if (cur == par->Right) // узел рут правого поддерева предыдущего (искомого) узла
-        return par;
 
-    return Maximum(cur->Left);
+    TreeNode *par = cur->Parent;
 
+    while (par->Right != cur){
+        cur = par;
+        par = cur->Parent;
+    }
 
+    return par;
 }
 
 ///////////////////////////////////////////
